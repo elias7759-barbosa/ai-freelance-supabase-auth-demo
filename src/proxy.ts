@@ -17,6 +17,7 @@ export async function proxy(request: NextRequest) {
     },
   });
   await supabase.auth.getClaims();
+  response = NextResponse.next({ request });
   response.headers.set("Cache-Control", "private, no-store");
   return response;
 }
