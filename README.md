@@ -33,7 +33,17 @@ Server Actions write authentication cookies through a request-scoped SSR client.
 
 Initial login continued to work while renewed session cookies were not persisted in the browser. A controlled one-line regression discarded the response carrying those cookies. Removing that line restored persistence without weakening authentication.
 
+A deterministic renewal test and separate server/browser observations isolated the missing cookie delivery. The original test stayed unchanged throughout.
+
 See [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for reproduction, evidence, root cause and fix. Historical tags preserve the working baseline, deliberate regression and verified correction.
+
+## Screenshots
+
+![Protected dashboard with a fictional test account](portfolio/screenshots/02-protected-dashboard.png)
+
+[Login](portfolio/screenshots/01-login.png) · [Baseline → broken → fixed evidence](portfolio/screenshots/03-regression-evidence.png) · [Validation results](portfolio/screenshots/04-validation.png) · [Final application](portfolio/screenshots/05-final-app.png)
+
+The application images are real browser captures. The two evidence images are labeled summaries of actual test executions, not terminal screenshots. See [capture provenance](portfolio/EVIDENCE.md).
 
 ## Validation
 
