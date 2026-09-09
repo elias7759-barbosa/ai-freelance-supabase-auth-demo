@@ -47,7 +47,7 @@ The application images are real browser captures. The two evidence images are la
 
 ## Validation
 
-- 6 unit tests.
+- 6 application unit tests + 4 test-runner configuration tests.
 - 6 end-to-end tests, including desktop and mobile.
 - Typecheck and lint.
 - Production build.
@@ -85,7 +85,7 @@ Stop any existing server on port 3007 before production E2E so the runner starts
 
 The E2E runner requires management access to the dedicated sandbox. It uses `SUPABASE_ACCESS_TOKEN` supplied securely, or the Supabase CLI credential from macOS Keychain. This credential belongs only to the test process and is never imported by the application. Passwords are generated in memory. Tests remove their own fictional accounts and mailbox messages, including on failure. Traces and videos are disabled to avoid recording credentials.
 
-The test helper has an explicit project-reference guard. A different sandbox requires deliberate provisioning and review of that guard; changing the application URL alone is insufficient. The migration and `supabase/auth-settings.json` document the private-mailbox setup. Do not reuse production data or credentials.
+To run E2E against your own authorized demo, provision the private-mailbox migration and settings documented in `supabase/auth-settings.json`. Set `NEXT_PUBLIC_SUPABASE_URL` to its standard hosted HTTPS URL, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` to that project’s publishable key, and `E2E_SUPABASE_PROJECT_REF` independently to its project reference. Supply an authorized management token through `SUPABASE_ACCESS_TOKEN` on machines without macOS Keychain. No source edit is required. Destructive test helpers are guarded against this explicitly configured sandbox. Missing or mismatched references fail before credential retrieval or management requests; there is no default project. Custom domains and self-hosted URLs are not supported by this management-API test runner. An explicit match prevents accidental destination mismatch; it does not certify that a project is disposable. Use a dedicated test project, never production data or credentials.
 
 ## Environment Variables
 
@@ -94,6 +94,12 @@ Application variable names:
 ```text
 NEXT_PUBLIC_SUPABASE_URL
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+```
+
+Required E2E-only variable (not used by the application):
+
+```text
+E2E_SUPABASE_PROJECT_REF
 ```
 
 Optional test-process variable names:
@@ -108,6 +114,6 @@ E2E_PRODUCTION
 
 ## Project Status
 
-**Demonstration Project.** The controlled fix is integrated. Portfolio presentation is under review and the repository remains private.
+**Demonstration Project.** The troubleshooting scenario is complete and validated. This repository is prepared as a technical portfolio sample.
 
 Validation uses a local production build with real hosted Supabase Auth, not a public HTTPS deployment. The Free sandbox excludes leaked-password checking, and the private mailbox does not test external email delivery. ESLint 9 is retained for compatibility with the installed Next.js lint configuration; reassess support when upgrading the stack.

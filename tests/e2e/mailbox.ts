@@ -1,10 +1,10 @@
 // Test runner only. Never imported by the app or shipped to the browser.
 import { execFileSync } from 'node:child_process';
 import { loadEnvFile } from 'node:process';
+import { testProjectRef } from '../support/test-project';
 
 loadEnvFile('.env.local');
-const ref = new URL(process.env.NEXT_PUBLIC_SUPABASE_URL!).hostname.split('.')[0];
-if (ref !== 'vlvsqnnyrqdmdupjkoeo') throw new Error('Test runner is restricted to the dedicated demo project.');
+const ref = testProjectRef(process.env);
 
 function credential() {
   return process.env.SUPABASE_ACCESS_TOKEN || execFileSync('security', ['find-generic-password', '-s', 'Supabase CLI', '-w'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
