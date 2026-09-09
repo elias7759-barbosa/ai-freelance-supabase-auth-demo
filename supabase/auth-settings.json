@@ -1,0 +1,9 @@
+{
+  "mailer_autoconfirm": false,
+  "password_min_length": 12,
+  "rate_limit_email_sent": 20,
+  "hook_send_email_enabled": true,
+  "hook_send_email_uri": "pg-functions://postgres/auth_test/capture_email",
+  "site_url": "http://localhost:3007",
+  "uri_allow_list": "http://localhost:3007/**"
+}
