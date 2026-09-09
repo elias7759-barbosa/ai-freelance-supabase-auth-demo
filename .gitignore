@@ -46,3 +46,10 @@ next-env.d.ts
 /evidence/
 /work/
 *.tsbuildinfo
+
+# Local-only metadata and archived exercise notes
+/AGENTS.md
+/CLAUDE.md
+/supabase/.temp/
+/docs/BASELINE.md
+/docs/BUG-CANDIDATES.md
